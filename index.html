@@ -1600,7 +1600,7 @@ body::before {
   background: var(--bg);
   position: relative;
 }
-.gift__head { text-align: center; }
+.gift__head { text-align: center; margin-bottom: 48px; }
 .gift__head .eyebrow { margin-bottom: 22px; }
 .gift__title {
   font-family: var(--serif);
@@ -1888,6 +1888,274 @@ body::before {
   .cheque__watermark { font-size: 36px; right: 14%; }
   .cheque-row--amount .val { font-size: 18px; }
 }
+
+/* ============================================================
+   REVIEWS · Letterboxd-style audience reviews
+   ============================================================ */
+.reviews {
+  padding: 100px 0 90px;
+  background: linear-gradient(180deg, #08060500 0%, #0c0907 50%, #08060500 100%);
+  position: relative;
+}
+.reviews__head {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 56px;
+}
+.reviews__title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(44px, 7.5vw, 78px);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 14px 0 20px;
+}
+.reviews__lede {
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--ink-dim);
+  max-width: 480px;
+  margin: 0 auto 36px;
+  text-wrap: pretty;
+}
+.reviews__stats {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  margin: 0 auto 36px;
+  padding: 22px 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  max-width: 480px;
+  flex-wrap: wrap;
+}
+.reviews__stats > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.reviews__stats .n {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 32px;
+  color: var(--accent);
+  letter-spacing: 0;
+}
+.reviews__cta {
+  appearance: none;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--rule-strong);
+  padding: 16px 32px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.reviews__cta:hover { background: var(--accent); border-color: var(--accent); letter-spacing: 0.42em; }
+.reviews__cta .icon { font-size: 13px; color: var(--accent); transition: color 0.3s; }
+.reviews__cta:hover .icon { color: #fff; }
+.reviews__list {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.reviews__empty {
+  text-align: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 17px;
+  color: var(--ink-faint);
+  padding: 40px 20px;
+  border: 1px dashed var(--rule);
+}
+.review {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 18px;
+  padding: 22px 4px;
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
+}
+.review:first-child { border-top: 1px solid var(--rule); }
+.review__avatar {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: #1a1310;
+  border: 1px solid var(--rule-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 22px;
+  color: var(--ink);
+  overflow: hidden;
+}
+.review__body { min-width: 0; }
+.review__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 14px;
+  margin-bottom: 4px;
+}
+.review__name {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.review__watched {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.review__watched em { font-style: normal; color: var(--ink-dim); }
+.review__stars { color: var(--accent); font-size: 14px; letter-spacing: 0.08em; margin-bottom: 8px; }
+.review__stars .off { color: var(--ink-faint); opacity: 0.5; }
+.review__text {
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+.review__meta {
+  margin-top: 10px;
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.review__side { color: var(--accent); }
+
+/* Review modal */
+.rmodal {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow-y: auto;
+}
+.rmodal.visible { display: flex; animation: rFadeIn 0.3s ease; }
+@keyframes rFadeIn { from { opacity: 0; } to { opacity: 1; } }
+.rmodal__card {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  max-width: 820px;
+  width: 100%;
+  background: #12100e;
+  border: 1px solid var(--rule-strong);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.8), 0 0 0 1px rgba(184,39,44,0.15);
+  max-height: min(90vh, 720px);
+  overflow: hidden;
+  animation: rSlideIn 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+@keyframes rSlideIn { from { transform: translateY(24px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.rmodal__poster { position: relative; overflow: hidden; background: #0a0706; }
+.rmodal__poster img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.3) contrast(1.08) brightness(0.7); }
+.rmodal__poster-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.9) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px 22px;
+  color: #fff;
+}
+.rmodal__poster-tag { font-family: var(--mono); font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+.rmodal__poster-title { font-family: var(--serif); font-style: italic; font-size: 34px; line-height: 0.98; letter-spacing: -0.01em; margin-bottom: 12px; }
+.rmodal__poster-year { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.36em; text-transform: uppercase; color: var(--ink-dim); }
+.rmodal__body { position: relative; padding: 32px 30px 28px; overflow-y: auto; }
+.rmodal__close {
+  position: absolute; top: 14px; right: 14px;
+  width: 34px; height: 34px;
+  background: transparent; border: 1px solid var(--rule); color: var(--ink);
+  font-size: 20px; cursor: pointer; font-family: var(--serif); transition: all 0.25s; line-height: 1;
+}
+.rmodal__close:hover { border-color: var(--accent); color: var(--accent); }
+.rmodal__eyebrow { font-family: var(--mono); font-size: 9px; letter-spacing: 0.36em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 8px; }
+.rmodal__title { font-family: var(--serif); font-style: italic; font-size: 28px; line-height: 1.1; color: var(--ink); margin-bottom: 4px; }
+.rmodal__date {
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--ink-dim); margin-bottom: 24px; padding-bottom: 18px; border-bottom: 1px solid var(--rule);
+}
+.rmodal .field { margin-bottom: 18px; }
+.rmodal .field label { display: block; font-family: var(--mono); font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--ink-dim); margin-bottom: 8px; }
+.rmodal input[type="text"], .rmodal textarea {
+  width: 100%; background: #0a0706; border: 1px solid var(--rule); color: var(--ink);
+  font-family: var(--serif); font-size: 16px; padding: 12px 14px; transition: border-color 0.2s; box-sizing: border-box;
+}
+.rmodal textarea { min-height: 100px; resize: vertical; line-height: 1.5; }
+.rmodal input:focus, .rmodal textarea:focus { outline: none; border-color: var(--accent); }
+.rmodal__row { display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: start; }
+.rmodal__rating { display: flex; gap: 4px; font-size: 26px; color: var(--accent); padding-top: 2px; }
+.rmodal__side-opts { display: flex; gap: 8px; }
+.rmodal__side-opts input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
+.rmodal__side-opts label {
+  cursor: pointer; margin: 0; padding: 10px 16px; background: #0a0706;
+  border: 1px solid var(--rule); color: var(--ink-dim);
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase; transition: all 0.2s;
+}
+.rmodal__side-opts input[type="radio"]:checked + label { color: var(--accent); border-color: var(--accent); background: rgba(184,39,44,0.1); }
+.rmodal__submit {
+  appearance: none; background: var(--accent); color: #fff; border: 1px solid var(--accent);
+  padding: 14px 28px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.36em;
+  text-transform: uppercase; cursor: pointer; width: 100%; margin-top: 6px; transition: all 0.25s;
+}
+.rmodal__submit:hover { letter-spacing: 0.42em; background: #8a2529; border-color: #8a2529; }
+.rmodal__submit[disabled] { opacity: 0.5; cursor: not-allowed; }
+
+@media (max-width: 640px) {
+  .reviews { padding: 80px 0 70px; }
+  .reviews__stats { gap: 28px; padding: 18px 0; }
+  .reviews__stats .n { font-size: 26px; }
+  .review { grid-template-columns: 44px 1fr; gap: 14px; }
+  .review__avatar { width: 44px; height: 44px; font-size: 18px; }
+  .review__text { font-size: 15.5px; }
+  .review__name { font-size: 9.5px; }
+  .review__watched { font-size: 8.5px; }
+  .reviews__cta { padding: 14px 22px; font-size: 9.5px; letter-spacing: 0.28em; }
+  .rmodal { padding: 0; align-items: stretch; }
+  .rmodal__card { grid-template-columns: 1fr; max-width: 100%; max-height: 100vh; grid-template-rows: 180px 1fr; }
+  .rmodal__poster { grid-row: 1; }
+  .rmodal__poster-overlay { padding: 18px 20px; }
+  .rmodal__poster-title { font-size: 26px; }
+  .rmodal__body { padding: 24px 22px 28px; }
+  .rmodal__row { grid-template-columns: 1fr; gap: 14px; }
+  .rmodal__title { font-size: 22px; }
+  .rmodal__rating { font-size: 28px; }
+}
 </style>
 </head>
 <body data-accent="crimson">
@@ -2093,7 +2361,7 @@ body::before {
         <div class="programme__time">11:00</div>
         <div class="programme__body">
           <div class="title">Pembukaan</div>
-          <div class="note">Tamu undangan dipersilahkan hadir</div>
+          <div class="note">Tamu undangan dipersilakan hadir</div>
         </div>
       </div>
       <div class="programme__row">
@@ -2143,7 +2411,7 @@ body::before {
 <!-- ============================================================
      RSVP — ticket stub
      ============================================================ -->
-<section class="rsvp" data-screen-label="07b RSVP" style="display:none">
+<section class="rsvp" data-screen-label="07b RSVP">
   <div class="container">
     <div class="rsvp__head">
       <span class="eyebrow center reveal"><span class="dot"></span>Reservation Desk<span class="dot"></span></span>
@@ -2159,9 +2427,8 @@ body::before {
 
       <div class="stub__body" id="stubBody">
         <div class="stub__row">
-          <span class="stub__label">Guest · Nama Tamu</span>
-          <div class="stub__input" id="guestNameDisplay" style="cursor:default;"></div>
-          <input id="guestName" type="hidden" />
+          <label class="stub__label" for="guestName">Guest · Nama Tamu</label>
+          <input class="stub__input" id="guestName" type="text" placeholder="Tuliskan nama Anda…" autocomplete="name" required />
         </div>
 
         <div class="stub__row">
@@ -2333,7 +2600,7 @@ body::before {
       <div class="rule reveal d1" style="margin: 28px auto;"></div>
       <p class="gift__lede reveal d2">
         Kehadiran Anda sudah menjadi hadiah yang paling berharga.
-        Namun bila berkenan memberi tanda kasih, berikut ini kami lampirkan nomor rekening kami.
+        Namun bila berkenan memberi tanda kasih, silakan tandatangani cek untuk menampilkan rekening.
       </p>
     </div>
 
@@ -2399,6 +2666,72 @@ body::before {
 </section>
 
 <div class="gift-toast" id="giftToast">Copied to clipboard</div>
+
+<!-- ============================================================
+     REVIEWS · Letterboxd-style audience reviews
+     ============================================================ -->
+<section class="reviews" data-screen-label="10 Reviews">
+  <div class="container">
+    <div class="reviews__head">
+      <span class="eyebrow center both reveal">Box Office · Audience</span>
+      <h2 class="reviews__title reveal d1">Ulasan Penonton</h2>
+      <p class="reviews__lede reveal d2">Bagikan ucapan &amp; doa Anda — seperti mengulas film yang baru selesai ditonton.</p>
+      <div class="reviews__stats reveal d2">
+        <div><span class="n" id="revAvg">—</span>Avg. Rating</div>
+        <div><span class="n" id="revCount">0</span>Reviews</div>
+        <div><span class="n">∞</span>Doa &amp; Cinta</div>
+      </div>
+      <div class="reveal d3">
+        <button class="reviews__cta" id="revOpen" type="button"><span class="icon">✎</span> Log Your Review</button>
+      </div>
+    </div>
+    <div class="reviews__list" id="revList"></div>
+  </div>
+</section>
+
+<!-- Review modal -->
+<div class="rmodal" id="rModal" role="dialog" aria-modal="true" aria-labelledby="rModalTitle">
+  <div class="rmodal__card">
+    <div class="rmodal__poster">
+      <img src="https://wedding-assets.nadhirarenusa.wedding/g6-megaphone.jpeg" alt="Nadhira &amp; Renusa" />
+      <div class="rmodal__poster-overlay">
+        <div class="rmodal__poster-tag">★ Now Showing</div>
+        <div class="rmodal__poster-title">Nadhira<br/>&amp; Renusa</div>
+        <div class="rmodal__poster-year">MMXXVI · Feature</div>
+      </div>
+    </div>
+    <div class="rmodal__body">
+      <button class="rmodal__close" id="rClose" type="button" aria-label="Close">×</button>
+      <div class="rmodal__eyebrow">I Watched…</div>
+      <div class="rmodal__title" id="rModalTitle"><em>Nadhira &amp; Renusa</em> <span style="color:var(--ink-dim);">2026</span></div>
+      <div class="rmodal__date">Watched on · 23 Mei 2026 · Bogor</div>
+      <form id="rForm" novalidate>
+        <div class="field">
+          <label for="rName">Your Name · Nama</label>
+          <input type="text" id="rName" required placeholder="Tuliskan nama Anda" autocomplete="name" />
+        </div>
+        <div class="rmodal__row">
+          <div class="field">
+            <label>Rating</label>
+            <div class="rmodal__rating" aria-label="5 stars">★★★★★</div>
+          </div>
+          <div class="field">
+            <label>Attending Side</label>
+            <div class="rmodal__side-opts">
+            <input type="radio" name="rSide" id="rSideB" value="Bride" checked /><label for="rSideB">Bride</label>
+            <input type="radio" name="rSide" id="rSideG" value="Groom" /><label for="rSideG">Groom</label>
+          </div>
+          </div>
+        </div>
+        <div class="field">
+          <label for="rText">Your Review · Ucapan &amp; Doa</label>
+          <textarea id="rText" required placeholder="Tulis ulasan, ucapan, atau doa untuk mempelai…"></textarea>
+        </div>
+        <button type="submit" class="rmodal__submit" id="rSubmit">Post Review</button>
+      </form>
+    </div>
+  </div>
+</div>
 
 <div class="sprockets" aria-hidden="true"></div>
 
@@ -2818,25 +3151,157 @@ document.getElementById("calBtn").addEventListener("click", () => {
 </script>
 
 <script>
+/* ============================================================
+   REVIEWS · Letterboxd-style audience reviews
+   ============================================================ */
+(function reviews() {
+  var WORKER = (document.querySelector('meta[name="rsvp-worker"]') || {}).content || '';
+  var listEl = document.getElementById('revList');
+  if (!listEl) return;
+
+  var openBtn = document.getElementById('revOpen');
+  var modal = document.getElementById('rModal');
+  var closeBtn = document.getElementById('rClose');
+  var form = document.getElementById('rForm');
+  var nameIn = document.getElementById('rName');
+  var textIn = document.getElementById('rText');
+  var submitBtn = document.getElementById('rSubmit');
+  var avgEl = document.getElementById('revAvg');
+  var countEl = document.getElementById('revCount');
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function(c) {
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+  function formatDate(iso) {
+    try {
+      var d = new Date(iso);
+      var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      return d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+    } catch(e) { return ''; }
+  }
+  function initials(name) {
+    var parts = String(name).trim().split(/\s+/);
+    if (!parts.length) return '?';
+    if (parts.length === 1) return parts[0][0].toUpperCase();
+    return (parts[0][0] + parts[parts.length-1][0]).toUpperCase();
+  }
+  function starsHTML(n) {
+    var out = '';
+    for (var i = 1; i <= 5; i++) out += i <= n ? '★' : '<span class="off">★</span>';
+    return out;
+  }
+
+  function render(arr) {
+    if (!arr || !arr.length) {
+      listEl.innerHTML = '<div class="reviews__empty">Jadilah yang pertama meninggalkan ulasan.</div>';
+      avgEl.textContent = '—';
+      countEl.textContent = '0';
+      return;
+    }
+    var sum = arr.reduce(function(a, r) { return a + (+r.rating || 0); }, 0);
+    avgEl.textContent = (sum / arr.length).toFixed(1);
+    countEl.textContent = String(arr.length);
+    listEl.innerHTML = arr.map(function(r) {
+      return '<article class="review">' +
+        '<div class="review__avatar">' + esc(initials(r.author)) + '</div>' +
+        '<div class="review__body">' +
+          '<div class="review__head">' +
+            '<span class="review__name">' + esc(r.author) + '</span>' +
+            '<span class="review__watched">Watched on <em>' + formatDate(r.created_at) + '</em></span>' +
+          '</div>' +
+          '<div class="review__stars" aria-label="' + r.rating + ' stars">' + starsHTML(r.rating) + '</div>' +
+          '<div class="review__text">' + esc(r.content) + '</div>' +
+          '<div class="review__meta">' +
+            '<span class="review__side">· ' + esc(r.side) + '\u2019s side</span>' +
+          '</div>' +
+        '</div>' +
+      '</article>';
+    }).join('');
+  }
+
+  function load() {
+    if (!WORKER) { render([]); return; }
+    fetch(WORKER + '/comments')
+      .then(function(r) { return r.ok ? r.json() : []; })
+      .then(function(arr) { render(Array.isArray(arr) ? arr : []); })
+      .catch(function() { render([]); });
+  }
+
+  function updateSubmit() {
+    submitBtn.disabled = !(nameIn.value.trim() && textIn.value.trim());
+  }
+  nameIn.addEventListener('input', updateSubmit);
+  textIn.addEventListener('input', updateSubmit);
+
+  function open() { modal.classList.add('visible'); document.body.style.overflow = 'hidden'; setTimeout(function() { nameIn.focus(); }, 100); }
+  function close() { modal.classList.remove('visible'); document.body.style.overflow = ''; }
+  openBtn.addEventListener('click', open);
+  closeBtn.addEventListener('click', close);
+  modal.addEventListener('click', function(e) { if (e.target === modal) close(); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && modal.classList.contains('visible')) close(); });
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (submitBtn.disabled) return;
+    var side = document.querySelector('input[name="rSide"]:checked');
+    var payload = {
+      author: nameIn.value.trim(),
+      content: textIn.value.trim(),
+      side: side ? side.value : 'Bride',
+      rating: 5
+    };
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Posting…';
+    fetch(WORKER + '/comments', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then(function(r) { return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function() {
+        close();
+        form.reset();
+        load();
+        setTimeout(function() {
+          var first = listEl.querySelector('.review');
+          if (first) window.scrollBy({ top: first.getBoundingClientRect().top - 120, behavior: 'smooth' });
+        }, 300);
+      })
+      .catch(function() { alert('Gagal mengirim ulasan, coba lagi.'); })
+      .finally(function() { submitBtn.disabled = false; submitBtn.textContent = 'Post Review'; updateSubmit(); });
+  });
+
+  updateSubmit();
+  load();
+})();
+</script>
+
+<script>
 /* RSVP backend integration */
 (function() {
   var WORKER = (document.querySelector('meta[name="rsvp-worker"]') || {}).content || '';
   if (!WORKER) return;
 
-  var token = new URLSearchParams(location.search).get('token') || '';
-  if (!token) return;
+  var pathParts = location.pathname.replace(/\/+$/, '').split('/').filter(Boolean);
+  var token = pathParts[pathParts.length - 1] || new URLSearchParams(location.search).get('token') || '';
 
   var rsvpSection = document.querySelector('section.rsvp');
-  var nameInput   = document.getElementById('guestName');
-  var nameDisplay = document.getElementById('guestNameDisplay');
-  var attendYes   = document.getElementById('attendYes');
-  var attendNo    = document.getElementById('attendNo');
-  var plusOne     = document.getElementById('plusOne');
-  var bodyEl      = document.getElementById('stubBody');
-  var confEl      = document.getElementById('stubConfirm');
-  var stampEl     = document.getElementById('stampText');
-  var msgEl       = document.getElementById('confirmMsg');
-  var subEl       = document.getElementById('confirmSub');
+  if (!token) {
+    if (rsvpSection) rsvpSection.style.display = 'none';
+    return;
+  }
+
+  var nameInput = document.getElementById('guestName');
+  var attendYes = document.getElementById('attendYes');
+  var attendNo  = document.getElementById('attendNo');
+  var plusOne   = document.getElementById('plusOne');
+  var bodyEl    = document.getElementById('stubBody');
+  var confEl    = document.getElementById('stubConfirm');
+  var stampEl   = document.getElementById('stampText');
+  var msgEl     = document.getElementById('confirmMsg');
+  var subEl     = document.getElementById('confirmSub');
 
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function(c) {
@@ -2898,23 +3363,17 @@ document.getElementById("calBtn").addEventListener("click", () => {
     }
   };
 
-  // Fetch guest record — only reveal section if token is valid
+  // Fetch guest record from Worker
   fetch(WORKER + '/rsvp/' + token)
     .then(function(r) { return r.ok ? r.json() : null; })
     .then(function(guest) {
       if (!guest) return;
-
-      // Reveal section now that token is confirmed valid
-      if (rsvpSection) rsvpSection.style.display = '';
-
-      // Show name as static text; seed hidden input for IIFE serial/validate logic
-      if (nameDisplay) nameDisplay.textContent = guest.name;
-      if (nameInput) {
+      // Pre-fill name
+      if (nameInput && guest.name) {
         nameInput.value = guest.name;
         nameInput.dispatchEvent(new Event('input'));
       }
-
-      // If already responded, show confirmation state
+      // If already responded, show confirmation
       if (guest.attending !== null && guest.attending !== undefined) {
         if (attendYes && (guest.attending === 1 || guest.attending === true)) {
           attendYes.checked = true;
